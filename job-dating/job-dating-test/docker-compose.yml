@@ -1,0 +1,9 @@
+version: "3.7"
+services: 
+    mongo-jd:
+        build: .
+        image: mongo-jd:latest
+        ports: 
+            - "27017:27017"
+        volumes: 
+            - d/dev/job-dating/job-dating-test/src/data/:/usr/src/app/
