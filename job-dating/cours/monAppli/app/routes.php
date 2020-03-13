@@ -9,6 +9,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
+use App\Application\Actions\JobDating\ListJobDatingsAction;
+use App\Application\Actions\JobDating\ViewJobDatingAction;
+use App\Application\Actions\JobDating\UpdateJobDatingAction;
+use App\Application\Actions\JobDating\DeleteJobDatingAction;
+
 return function (App $app) {
     $app->get('/', function (Request $request, Response $response) {
         $response->getBody()->write('Hello world!');
@@ -16,17 +21,21 @@ return function (App $app) {
     });
 
     $app->group('/jobdatings', function (Group $group) {
-        $group->get('', function(){});
-        $group->post('', function(){});
-        $group->get('/{id}', function(){});
-        $group->put('/{id}', function(){});
-        $group->delete('/{id}', function(){});
+        $group->get('', ListJobDatingsAction::class);
+        $group->get('/{id}', ViewJobDatingAction::class);
+        $group->put('/{id}', UpdateJobDatingAction::class);
+        $group->delete('/{id}', DeleteJobDatingAction::class);
+        // $group->get('', function(){});
+        // $group->post('', function(){});
+        // $group->get('/{id}', function(){});
+        // $group->put('/{id}', function(){});
+        // $group->delete('/{id}', function(){});
 
-        $group->post('/{id}/{listName}', function(){});
+        // $group->post('/{id}/{listName}', function(){});
 
-        $group->get('/{id}/{listId}', function(){});
-        $group->put('/{id}/{listId}', function(){});
-        $group->delete('/{id}/{listId}', function(){});
+        // $group->get('/{id}/{listId}', function(){});
+        // $group->put('/{id}/{listId}', function(){});
+        // $group->delete('/{id}/{listId}', function(){});
     });
 
     $app->group('/users', function (Group $group) {
